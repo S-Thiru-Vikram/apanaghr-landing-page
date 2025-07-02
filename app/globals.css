@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+:root {
+  /* Light Mode Colors */
+  --background: #FFFFFF;
+  --foreground: #0A2E5A;
+  --primary: #0A2E5A;        /* Deep Blue - Primary brand */
+  --primary-foreground: #FFFFFF;
+  --accent: #4EB3A4;         /* Soft Teal - Secondary/AI */
+  --accent-foreground: #FFFFFF;
+  --highlight: #D4A017;      /* Gold Accent - Premium/CTA */
+  --heading: #0A2E5A;        /* Deep Blue for headings */
+  --text-secondary: #666666; /* Medium gray for secondary text */
+  --input-bg: #FFFFFF;
+  --border: #E6E6E6;         /* Warm Gray for borders */
+  --input: #E6E6E6;          /* Input border */
+  --ring: #4EB3A4;           /* Focus ring color */
+  --card-bg: #E6E6E6;        /* Warm Gray for cards */
+  --secondary: #F5F5F5;      /* Secondary background */
+  --secondary-foreground: #0A2E5A;
+  --muted: #F5F5F5;
+  --muted-foreground: #666666;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+}
+
+[data-theme="dark"] {
+  /* Dark Mode Colors */
+  --background: #121212;     /* Charcoal Black */
+  --foreground: #E0E0E0;     /* Light Gray - Primary text */
+  --primary: #4EB3A4;        /* Soft Teal as primary in dark mode */
+  --primary-foreground: #121212;
+  --accent: #4EB3A4;         /* Soft Teal - consistent accent */
+  --accent-foreground: #121212;
+  --highlight: #D4A017;      /* Gold Accent - unchanged */
+  --heading: #E0E0E0;        /* Light Gray for headings */
+  --text-secondary: #B0B0B0; /* Medium Gray for secondary text */
+  --input-bg: #1E1E1E;
+  --border: #333333;         /* Darker borders */
+  --input: #333333;          /* Input border */
+  --ring: #4EB3A4;           /* Focus ring color */
+  --card-bg: #1E1E1E;        /* Dark cards */
+  --secondary: #1E1E1E;      /* Secondary background */
+  --secondary-foreground: #E0E0E0;
+  --muted: #1E1E1E;
+  --muted-foreground: #B0B0B0;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Backdrop blur support */
+@supports (backdrop-filter: blur(12px)) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Only include CSS classes that are actually used */
+.bg-background { background-color: var(--background); }
+.bg-card-bg { background-color: var(--card-bg); }
+
+.text-foreground { color: var(--foreground); }
+.text-primary { color: var(--primary); }
+.text-accent { color: var(--accent); }
+.text-highlight { color: var(--highlight); }
+.text-heading { color: var(--heading); }
+
+.border-primary { border-color: var(--primary); }
+.border-accent { border-color: var(--accent); }
+.border-highlight { border-color: var(--highlight); }
+
+.bg-primary { background-color: var(--primary); }
+.bg-accent { background-color: var(--accent); }
+.bg-highlight { background-color: var(--highlight); }
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+/* Improved hero section background */
+.hero-gradient {
+  background: linear-gradient(135deg, var(--background) 0%, rgba(78, 179, 164, 0.05) 50%, rgba(212, 160, 23, 0.05) 100%);
+}
+.text-accent { color: var(--accent); }
+.text-highlight { color: var(--highlight); }
+.text-heading { color: var(--heading); }
+
+.border-border { border-color: var(--border); }
+
+.focus\:ring-accent:focus { 
+  --tw-ring-color: var(--accent); 
+}
+
+.focus\:ring-offset-background:focus { 
+  --tw-ring-offset-color: var(--background); 
+}
+
+/* Theme toggle specific styles */
+.theme-toggle-track {
+  background-color: var(--border);
+}
+
+.theme-toggle-track:hover {
+  background-color: var(--accent);
+  opacity: 0.7;
+}
+
+/* Hero section animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient backgrounds for feature tags */
+.bg-accent\/10 {
+  background-color: rgba(78, 179, 164, 0.1);
+}
+
+.bg-primary\/10 {
+  background-color: rgba(10, 46, 90, 0.1);
+}
+
+.bg-highlight\/10 {
+  background-color: rgba(212, 160, 23, 0.1);
+}
