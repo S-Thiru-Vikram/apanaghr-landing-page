@@ -6,12 +6,10 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { ButtonProps } from "@/components/ui/button";
-import { MousePointerClick } from "lucide-react";
 
 interface ParticleButtonProps extends ButtonProps {
     onSuccess?: () => void;
     successDuration?: number;
-    showIcon?: boolean;
 }
 
 function SuccessParticles({
@@ -58,7 +56,6 @@ function ParticleButton({
     onClick,
     onSuccess,
     successDuration = 1000,
-    showIcon = false,
     className,
     ...props
 }: ParticleButtonProps) {
@@ -98,7 +95,6 @@ function ParticleButton({
                 {...props}
             >
                 {children}
-                {showIcon && <MousePointerClick className="h-4 w-4 ml-2" />}
             </Button>
         </>
     );

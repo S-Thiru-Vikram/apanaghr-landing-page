@@ -139,7 +139,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Removed CTA Button - as requested */}
             </div>
 
             {/* Right Image */}
