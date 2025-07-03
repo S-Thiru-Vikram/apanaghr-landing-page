@@ -17,6 +17,26 @@ export default function Home() {
     seconds: 0
   });
 
+  // Quiz state
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [quizAnswers, setQuizAnswers] = useState<string[]>([]);
+  
+  const quizQuestions = [
+    {
+      question: "What's your ideal living situation?",
+      options: ["PG/Hostel", "Shared Flat", "Independent Flat", "Studio Apartment"]
+    },
+    {
+      question: "What's your preferred location type?",
+      options: ["City Center", "Near Office/College", "Quiet Residential", "Transportation Hub"]
+    },
+    {
+      question: "What's most important to you?",
+      options: ["Budget-friendly", "Premium Amenities", "Great Roommates", "Flexible Terms"]
+    }
+  ];
+
   // Set target date (30 days from now)
   useEffect(() => {
     const targetDate = new Date();
@@ -39,6 +59,30 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  const handleQuizAnswer = (answer: string) => {
+    const newAnswers = [...quizAnswers, answer];
+    setQuizAnswers(newAnswers);
+    
+    if (currentQuestion < quizQuestions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      // Quiz completed
+      setShowQuiz(false);
+      setShowSuccess(true);
+      setEmail("");
+      // Reset quiz
+      setCurrentQuestion(0);
+      setQuizAnswers([]);
+      setTimeout(() => setShowSuccess(false), 5000);
+    }
+  };
+
+  const startQuiz = () => {
+    setShowQuiz(true);
+    setCurrentQuestion(0);
+    setQuizAnswers([]);
+  };
+
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim()) {
@@ -48,6 +92,7 @@ export default function Home() {
       setTimeout(() => setShowSuccess(false), 5000);
     }
   };
+
   return (
     <>
       <Navbar />
@@ -193,6 +238,78 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Progress Indicators & Social Proof Section */}
+      <section className="bg-background py-8 lg:py-12 border-b border-foreground/10">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="text-center space-y-6">
+            <div className="space-y-4">
+              <h3 className="text-xl lg:text-2xl font-bold text-heading">
+                Join the Waitlist
+              </h3>
+              <p className="text-foreground/80">
+                Be among the first to experience AI-powered housing solutions
+              </p>
+            </div>
+
+            {/* Progress Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {/* Early Birds */}
+              <div className="flex flex-col items-center space-y-3">
+                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-all duration-300">
+                  <svg className="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent">1,247+</div>
+                  <div className="text-sm text-foreground/70">Early Birds Signed Up</div>
+                </div>
+              </div>
+
+              {/* Cities Ready */}
+              <div className="flex flex-col items-center space-y-3">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
+                  <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">15+</div>
+                  <div className="text-sm text-foreground/70">Cities Ready to Launch</div>
+                </div>
+              </div>
+
+              {/* Properties Verified */}
+              <div className="flex flex-col items-center space-y-3">
+                <div className="w-16 h-16 bg-highlight/10 rounded-full flex items-center justify-center group-hover:bg-highlight/20 transition-all duration-300">
+                  <svg className="w-8 h-8 text-highlight" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-6a1 1 0 00-1-1H9a1 1 0 00-1 1v6a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-highlight">5,000+</div>
+                  <div className="text-sm text-foreground/70">Properties Pre-Verified</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="max-w-md mx-auto space-y-3">
+              <div className="flex justify-between text-sm text-foreground/70">
+                <span>Launch Progress</span>
+                <span>73%</span>
+              </div>
+              <div className="w-full bg-card-bg rounded-full h-2">
+                <div className="bg-gradient-to-r from-accent to-primary h-2 rounded-full transition-all duration-1000 ease-out" style={{ width: '73%' }}></div>
+              </div>
+              <p className="text-xs text-foreground/60">
+                Almost ready! Platform launching soon.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Feature Preview Section */}
       <section className="bg-background py-16 lg:py-20">
         <div className="container mx-auto px-6 max-w-6xl">
@@ -224,11 +341,7 @@ export default function Home() {
               <div className="flex flex-col items-center text-center space-y-4 group">
                 <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center group-hover:bg-accent/20 transition-all duration-300 group-hover:scale-110">
                   <svg className="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                    <circle cx="17" cy="4" r="1" fill="currentColor"/>
-                    <circle cx="17" cy="8" r="1" fill="currentColor"/>
-                    <circle cx="17" cy="12" r="1" fill="currentColor"/>
-                    <circle cx="17" cy="16" r="1" fill="currentColor"/>
+                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm14-12a2 2 0 100-4 2 2 0 000 4zm0 8a2 2 0 100-4 2 2 0 000 4zm0 8a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div className="space-y-2">
@@ -254,7 +367,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Email Subscription Section */}
+      {/* Email Subscription Section with AI Quiz */}
       <section className="bg-background py-16 lg:py-20">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="text-center space-y-8">
@@ -266,6 +379,58 @@ export default function Home() {
                 Get notified when we launch and be among the first to experience AI-powered room and roommate matching.
               </p>
             </div>
+
+            {/* AI Quiz Modal */}
+            {showQuiz && (
+              <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                <div className="bg-background rounded-2xl p-8 max-w-md w-full border border-accent/20 shadow-2xl">
+                  <div className="space-y-6">
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold text-heading mb-2">
+                        Help us personalize your experience
+                      </h3>
+                      <div className="flex justify-center space-x-2 mb-4">
+                        {quizQuestions.map((_, index) => (
+                          <div
+                            key={index}
+                            className={`w-8 h-2 rounded-full transition-all duration-300 ${
+                              index <= currentQuestion ? 'bg-accent' : 'bg-card-bg'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-foreground/70">
+                        Question {currentQuestion + 1} of {quizQuestions.length}
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-semibold text-heading text-center">
+                        {quizQuestions[currentQuestion].question}
+                      </h4>
+                      <div className="grid grid-cols-1 gap-3">
+                        {quizQuestions[currentQuestion].options.map((option, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleQuizAnswer(option)}
+                            className="p-4 bg-card-bg hover:bg-accent/10 border border-accent/20 rounded-xl text-left transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                          >
+                            <span className="text-foreground font-medium">{option}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => setShowQuiz(false)}
+                      className="w-full p-2 text-foreground/60 hover:text-foreground transition-colors"
+                    >
+                      Skip for now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="max-w-md mx-auto">
               <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -279,14 +444,25 @@ export default function Home() {
                     className="w-full h-12 px-6 bg-card-bg border-2 border-accent/20 rounded-full text-foreground placeholder-foreground/60 focus:outline-none focus:border-accent transition-colors duration-300"
                   />
                 </div>
-                <ParticleButton 
-                  type="submit"
-                  size="default"
-                  className="h-12 px-8 bg-primary border-2 border-primary text-white font-semibold rounded-full hover:bg-primary/90 hover:border-primary/90 hover:shadow-2xl hover:scale-105 transition-all duration-300 active:scale-95 whitespace-nowrap"
-                  onSuccess={() => console.log('Email submitted with particles!')}
-                >
-                  Notify Me
-                </ParticleButton>
+                <div className="flex gap-2">
+                  <ParticleButton 
+                    type="button"
+                    onClick={startQuiz}
+                    size="default"
+                    className="h-12 px-6 bg-accent border-2 border-accent text-white font-semibold rounded-full hover:bg-accent/90 hover:border-accent/90 hover:shadow-2xl hover:scale-105 transition-all duration-300 active:scale-95 whitespace-nowrap"
+                    onSuccess={() => console.log('Quiz started!')}
+                  >
+                    🤖 AI Match
+                  </ParticleButton>
+                  <ParticleButton 
+                    type="submit"
+                    size="default"
+                    className="h-12 px-8 bg-primary border-2 border-primary text-white font-semibold rounded-full hover:bg-primary/90 hover:border-primary/90 hover:shadow-2xl hover:scale-105 transition-all duration-300 active:scale-95 whitespace-nowrap"
+                    onSuccess={() => console.log('Email submitted with particles!')}
+                  >
+                    Notify Me
+                  </ParticleButton>
+                </div>
               </form>
               
               {/* Success Message */}
