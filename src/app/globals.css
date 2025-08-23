@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+}
+
+@layer base {
+  :root {
+    /* Light mode */
+    --background: #ffffff;
+    --foreground: #171717;
+    --brand-color: #006B6C;
+    --card-bg: #f8f9fa;
+    --font-sans: var(--font-inter);
+    --muted-text: #6c757d;
+    --nav-bg: rgba(255, 255, 255, 0.8);
+    --input-bg: #ffffff;
+    --input-border: #d1d5db;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --accent-bg: #f8ffff;
+    --hover-bg: #f3f4f6;
+    --border-color: #e5e7eb;
+    --success-bg: #f0fdf4;
+    --success-text: #166534;
+    --warning-bg: #fffbeb;
+    --warning-text: #92400e;
+    --error-bg: #fef2f2;
+    --error-text: #dc2626;
+    --modal-bg: #ffffff;
+    --modal-overlay: rgba(0, 0, 0, 0.25);
+    --primary-gradient: linear-gradient(135deg, #006B6C 0%, #00A3A4 100%);
+    --card-hover: #ffffff;
+    --divider: #e5e7eb;
+    --link: #006B6C;
+    --link-hover: #005455;
+    --button-text: #ffffff;
+    --button-disabled: #e5e7eb;
+  }
+
+  .dark {
+    /* Dark mode */
+    --background: #121212;
+    --foreground: #ffffff;
+    --brand-color: #26A69A;
+    --card-bg: #1E1E1E;
+    --muted-text: #CCCCCC;
+    --nav-bg: rgba(18, 18, 18, 0.9);
+    --input-bg: #1E1E1E;
+    --input-border: #2A2A2A;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --accent-bg: #1a1a1a;
+    --hover-bg: #2a2a2a;
+    --border-color: #2A2A2A;
+    --success-bg: #1a2e1a;
+    --success-text: #80CBC4;
+    --warning-bg: #2a2416;
+    --warning-text: #fbbf24;
+    --error-bg: #2a1616;
+    --error-text: #f87171;
+    --modal-bg: #1E1E1E;
+    --modal-overlay: rgba(0, 0, 0, 0.6);
+    --primary-gradient: linear-gradient(135deg, #26A69A 0%, #4DB6AC 100%);
+    --card-hover: #252525;
+    --divider: #2A2A2A;
+    --link: #4DB6AC;
+    --link-hover: #26A69A;
+    --button-text: #ffffff;
+    --button-disabled: #2A2A2A;
+  }
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Global transitions */
+*, ::before, ::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Animation delays */
+
+/* Animation delays */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+/* Navigation styles */
+.nav-blur {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.nav-title {
+  color: var(--brand-color);
+  font-family: 'Domi', var(--font-geist-sans), sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  -webkit-text-stroke: 0.25px var(--brand-color);
+  transition: color 0.3s ease;
+}
+
+/* Custom ApanaGhr logo styles */
+.brand-text {
+  color: var(--brand-color);
+  text-shadow: 0 1px 2px rgba(38, 166, 154, 0.1);
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.brand-icon {
+  transform: rotate(-12deg) translateY(-1px);
+  filter: drop-shadow(0 1px 1px rgba(38, 166, 154, 0.2));
+  transition: filter 0.3s ease;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--brand-color);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link-active::after {
+  width: 100%;
+}
+
+/* Mobile nav link hover effect */
+.nav-link-mobile {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link-mobile:hover {
+  background-color: var(--hover-bg);
+  padding-left: 1.5rem;
+}
+
+/* Dark mode specific styles */
+:root.dark .nav-link-mobile:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Card and component styles */
+.card-bg {
+  background-color: var(--card-bg);
+  transition: background-color 0.3s ease;
+}
+
+.input-bg {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.modal-bg {
+  background-color: var(--modal-bg);
+  transition: background-color 0.3s ease;
+}
+
+.modal-overlay {
+  background-color: var(--modal-overlay);
+  transition: background-color 0.3s ease;
+}
+
+/* Text color utilities */
+.text-muted {
+  color: var(--muted-text);
+  transition: color 0.3s ease;
+}
+
+.text-brand {
+  color: var(--brand-color);
+  transition: color 0.3s ease;
+}
+
+/* Shadow utilities */
+.shadow-custom {
+  box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+}
+
+.shadow-custom-lg {
+  box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
+}
+
+/* Gradient backgrounds for dark mode */
+:root.dark .gradient-bg-1 {
+  background: linear-gradient(to bottom, #121212, #1a1a1a);
+}
+
+:root.dark .gradient-bg-2 {
+  background: linear-gradient(to bottom, #1a1a1a, #121212);
+}
+
+:root .gradient-bg-1 {
+  background: linear-gradient(to bottom, #f8ffff, #ffffff);
+}
+
+:root .gradient-bg-2 {
+  background: linear-gradient(to bottom, #ffffff, #f8ffff);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+/* Ensure proper contrast in dark mode */
+:root.dark input::placeholder {
+  color: #888888;
+}
+
+:root.dark .text-gray-600 {
+  color: var(--muted-text) !important;
+}
+
+:root.dark .text-gray-900 {
+  color: var(--foreground) !important;
+}
+
+:root.dark .bg-white {
+  background-color: var(--card-bg) !important;
+}
+
+:root.dark .border-gray-300 {
+  border-color: var(--input-border) !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
