@@ -94,8 +94,8 @@ const Hero: React.FC = () => {
             <div className="relative w-full h-full flex items-center justify-center">
               <div className="relative h-32 w-32 md:h-48 md:w-48 mb-8">
                 <Image
-                  src={slides[currentSlide].image}
-                  alt={slides[currentSlide].title}
+                  src="/logo.png"
+                  alt="ApanaGhr Logo"
                   fill
                   className="object-contain"
                   priority
