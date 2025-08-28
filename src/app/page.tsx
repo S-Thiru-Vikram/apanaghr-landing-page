@@ -2,7 +2,6 @@
 
 import HeroNew from '../components/HeroNew';
 import SearchBar from '../components/SearchBar';
-import PropertyShowcase from '../components/PropertyShowcase';
 import TopPlaces from '../components/TopPlaces';
 import RecommendedPGs from '../components/RecommendedPGs';
 import WhyApnaGhr from '../components/WhyApnaGhr';
@@ -18,14 +17,11 @@ export default function Home() {
         <HeroNew />
         <SearchBar />
       </section>
-      <section id="properties">
-        <PropertyShowcase />
+      <section id="recommended-pgs">
+        <RecommendedPGs />
       </section>
       <section id="top-places">
         <TopPlaces />
-      </section>
-      <section id="recommended-pgs">
-        <RecommendedPGs />
       </section>
       <section id="why-apanaghr">
         <WhyApnaGhr />
