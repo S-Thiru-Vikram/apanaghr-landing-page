@@ -3,6 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaMapMarkerAlt, FaHome, FaUsers, FaStar, FaArrowRight } from 'react-icons/fa';
+import Image from 'next/image';
+
 
 // Top cities data with statistics
 const topCities = [
@@ -10,33 +12,33 @@ const topCities = [
     id: 1,
     name: "Bangalore",
     state: "Karnataka",
-    image: "/images/bangalore.jpg",
+    image: "/images/bangalore.png",
     pgCount: "2,500+",
     averageRent: "₹8,000 - ₹15,000",
     rating: 4.8,
     popularAreas: ["Koramangala", "Whitefield", "Electronic City", "HSR Layout"],
     highlights: ["IT Hub", "Student Friendly", "Metro Connectivity"],
-    gradient: "from-purple-500 to-pink-500",
+    
     description: "India's Silicon Valley with numerous PGs near tech parks"
   },
   {
     id: 2,
     name: "Chennai",
     state: "Tamil Nadu", 
-    image: "/images/chennai.jpg",
+    image: "/images/chennai.png",
     pgCount: "1,800+",
     averageRent: "₹6,000 - ₹12,000",
     rating: 4.6,
     popularAreas: ["Anna Nagar", "T. Nagar", "Velachery", "OMR"],
     highlights: ["Coastal City", "Cultural Hub", "Affordable"],
-    gradient: "from-blue-500 to-cyan-500",
+    
     description: "Cultural capital with excellent educational institutions"
   },
   {
     id: 3,
     name: "Hyderabad",
     state: "Telangana",
-    image: "/images/hyderabad.jpg", 
+    image: "/images/hyderabad.png", 
     pgCount: "1,600+",
     averageRent: "₹7,000 - ₹13,000",
     rating: 4.7,
@@ -49,7 +51,7 @@ const topCities = [
     id: 4,
     name: "Pune",
     state: "Maharashtra",
-    image: "/images/pune.jpg",
+    image: "/images/pune.png",
     pgCount: "2,200+", 
     averageRent: "₹8,500 - ₹16,000",
     rating: 4.5,
@@ -62,7 +64,7 @@ const topCities = [
     id: 5,
     name: "Mumbai",
     state: "Maharashtra",
-    image: "/images/mumbai.jpg",
+    image: "/images/mumbai.png",
     pgCount: "3,000+",
     averageRent: "₹12,000 - ₹25,000",
     rating: 4.4,
@@ -75,7 +77,7 @@ const topCities = [
     id: 6,
     name: "Delhi NCR",
     state: "Delhi",
-    image: "/images/delhi.jpg",
+    image: "/images/delhi.png",
     pgCount: "2,800+",
     averageRent: "₹10,000 - ₹20,000", 
     rating: 4.3,
@@ -133,49 +135,56 @@ const TopPlaces: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
         >
           {topCities.map((city) => (
             <motion.div
               key={city.id}
               variants={cardVariants}
-              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer h-[280px] bg-transparent"
               whileHover={{ y: -5 }}
             >
-              {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${city.gradient} opacity-90`} />
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <Image
+                  src={city.image}
+                  alt={city.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-100"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={city.id <= 3}
+                />
+              </div>
+              
+              {/* Background Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/30" />
               
               {/* Content */}
-              <div className="relative p-6 h-80 flex flex-col justify-between text-white">
+              <div className="relative p-3 h-full flex flex-col justify-between text-white">
                 {/* Top Section */}
                 <div>
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-2">
                     <div>
-                      <h3 className="text-2xl font-bold">{city.name}</h3>
-                      <p className="text-white/80 text-sm">{city.state}</p>
+                      <h3 className="text-2xl font-bold drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)]">{city.name}</h3>
+                      <p className="text-xs text-white/70 drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">{city.state}</p>
                     </div>
-                    <div className="flex items-center gap-1 bg-white/20 px-2 py-1 rounded-full">
-                      <FaStar className="w-3 h-3 text-yellow-300" />
-                      <span className="text-sm font-medium">{city.rating}</span>
+                    <div className="flex items-center gap-1 bg-black/10 px-2 py-1 rounded-full">
+                      <FaStar className="w-3 h-3 text-yellow-300 drop-shadow" />
+                      <span className="text-xs font-medium drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">{city.rating}</span>
                     </div>
                   </div>
 
-                  {/* Description */}
-                  <p className="text-white/90 text-sm mb-4 leading-relaxed">
-                    {city.description}
-                  </p>
-
                   {/* Statistics */}
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                  <div className="grid grid-cols-2 gap-2 mb-2">
+                    <div className="bg-black/20 backdrop-blur-md rounded-lg p-2">
                       <div className="flex items-center gap-2 mb-1">
                         <FaHome className="w-4 h-4" />
                         <span className="text-xs font-medium">Available PGs</span>
                       </div>
                       <div className="text-lg font-bold">{city.pgCount}</div>
                     </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                    <div className="bg-black/20 backdrop-blur-md rounded-lg p-2">
                       <div className="flex items-center gap-2 mb-1">
                         <FaMapMarkerAlt className="w-4 h-4" />
                         <span className="text-xs font-medium">Rent Range</span>
@@ -185,7 +194,7 @@ const TopPlaces: React.FC = () => {
                   </div>
 
                   {/* Popular Areas */}
-                  <div className="mb-4">
+                  <div className="mb-2">
                     <p className="text-xs font-medium mb-2 text-white/80">Popular Areas:</p>
                     <div className="flex flex-wrap gap-1">
                       {city.popularAreas.slice(0, 3).map((area, index) => (
@@ -205,31 +214,33 @@ const TopPlaces: React.FC = () => {
                   </div>
 
                   {/* Highlights */}
-                  <div className="flex flex-wrap gap-1 mb-4">
+                  <div className="flex flex-wrap gap-1 mb-2">
                     {city.highlights.map((highlight, index) => (
                       <span 
                         key={index}
-                        className="bg-white/30 text-xs px-2 py-1 rounded-full font-medium"
+                        className="bg-black/20 backdrop-blur-md text-xs px-2 py-0.5 rounded-full font-medium"
                       >
                         {highlight}
                       </span>
                     ))}
                   </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-white/80 mb-3 leading-relaxed drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">
+                    {city.description}
+                  </p>
                 </div>
 
                 {/* Bottom Section - CTA */}
                 <motion.button
-                  className="w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-lg py-3 px-4 flex items-center justify-center gap-2 font-medium transition-all duration-300 group-hover:bg-white/40"
+                  className="w-full bg-black/20 hover:bg-black/30 border border-white/10 rounded-lg py-1.5 px-3 flex items-center justify-center gap-2 text-xs font-medium transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>Explore {city.name}</span>
-                  <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <span className="drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">Explore {city.name}</span>
+                  <FaArrowRight className="w-2.5 h-2.5 group-hover:translate-x-1 transition-transform" />
                 </motion.button>
               </div>
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
           ))}
         </motion.div>
@@ -256,3 +267,6 @@ const TopPlaces: React.FC = () => {
 };
 
 export default TopPlaces;
+
+
+

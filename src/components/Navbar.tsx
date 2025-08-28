@@ -19,9 +19,9 @@ const Navbar: React.FC = () => {
 
   const navItems: NavItem[] = [
     { name: 'Home', href: '#home' },
+    { name: 'Properties', href: '#properties' },
     { name: 'Top Places', href: '#top-places' },
     { name: 'Top PGs', href: '#recommended-pgs' },
-    { name: 'Reviews', href: '#testimonials' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -101,9 +101,9 @@ const Navbar: React.FC = () => {
               </div>
               {/* Title */}
               <div className="flex items-center">
-                <h1 className="nav-title text-3xl tracking-wider font-black text-gray-800 dark:text-white">
+                <h1 className="nav-title text-3xl tracking-wider font-black">
                   Apana
-                  <span className="text-teal-600 dark:text-teal-400 font-black">Ghr</span>
+                  <span className="font-black">Ghr</span>
                 </h1>
               </div>
             </motion.div>

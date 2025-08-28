@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight, FaPlay } from 'react-icons/fa';
-import Image from 'next/image';
+
 
 interface SlideData {
   id: number;
-  image: string;
+  
   title: string;
   subtitle: string;
   description: string;
@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
   const slides: SlideData[] = [
     {
       id: 1,
-      image: "/logo.png", // Using existing logo as placeholder
+      
       title: "Find Your Perfect PG",
       subtitle: "Premium Living Spaces",
       description: "Discover verified PGs with all amenities in prime locations",
@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
     },
     {
       id: 2,
-      image: "/logo2.png", // Using existing logo as placeholder
+      
       title: "Comfortable Rooms",
       subtitle: "Affordable & Safe",
       description: "Browse through thousands of rooms with flexible rent options",
@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
     },
     {
       id: 3,
-      image: "/logo.png",
+      
       title: "Smart Roommate Matching",
       subtitle: "AI-Powered Compatibility",
       description: "Get matched with compatible roommates based on your preferences",
@@ -46,7 +46,7 @@ const Hero: React.FC = () => {
     },
     {
       id: 4,
-      image: "/logo2.png",
+      
       title: "Prime Locations",
       subtitle: "Near IT Hubs & Universities",
       description: "Stay close to your workplace or college with easy commute",
@@ -78,9 +78,16 @@ const Hero: React.FC = () => {
   }, [isAutoPlay, currentSlide]);
 
   return (
-    <section className="relative h-[100vh] overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+    <section className="relative h-[65vh] overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       {/* Image Slider Container */}
-      <div className="relative w-full h-full">
+      <div
+        className="relative w-full h-full"
+        style={{
+          backgroundImage: "url('/images/hero.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -92,27 +99,21 @@ const Hero: React.FC = () => {
           >
             {/* Background Image */}
             <div className="relative w-full h-full flex items-center justify-center">
-              <div className="relative h-32 w-32 md:h-48 md:w-48 mb-8">
-                <Image
-                  src="/logo.png"
-                  alt="ApanaGhr Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
+              <div className="relative h-20 w-20 md:h-32 md:w-32 mb-4">
+               
               </div>
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black/20"></div>
+              <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
             </div>
 
             {/* Content Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center -mt-8">
               <div className="text-center text-white px-4 max-w-4xl">
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="text-lg md:text-xl font-medium mb-4 text-teal-300"
+                  className="text-base md:text-lg font-medium mb-2 text-teal-300"
                 >
                   {slides[currentSlide].subtitle}
                 </motion.p>
@@ -121,7 +122,7 @@ const Hero: React.FC = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+                  className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3"
                 >
                   {slides[currentSlide].title}
                 </motion.h1>
@@ -130,7 +131,7 @@ const Hero: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="text-lg md:text-xl mb-8 text-gray-200 max-w-2xl mx-auto"
+                  className="text-sm md:text-base mb-4 text-gray-200 max-w-2xl mx-auto"
                 >
                   {slides[currentSlide].description}
                 </motion.p>
@@ -139,14 +140,29 @@ const Hero: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-300 flex items-center gap-3 mx-auto"
-                  onMouseEnter={() => setIsAutoPlay(false)}
-                  onMouseLeave={() => setIsAutoPlay(true)}
+                  className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg text-base font-semibold transition-colors duration-300 flex items-center gap-2 mx-auto"
                 >
                   <FaPlay className="w-4 h-4" />
                   {slides[currentSlide].buttonText}
                 </motion.button>
               </div>
+            </div>
+
+            {/* Slide Indicators */}
+            <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex space-x-3 z-30">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentSlide
+                      ? 'bg-white scale-110'
+                      : 'bg-white/50 hover:bg-white/75'
+                  }`}
+                  onMouseEnter={() => setIsAutoPlay(false)}
+                  onMouseLeave={() => setIsAutoPlay(true)}
+                />
+              ))}
             </div>
           </motion.div>
         </AnimatePresence>
@@ -169,23 +185,6 @@ const Hero: React.FC = () => {
         >
           <FaChevronRight className="w-5 h-5 md:w-6 md:h-6" />
         </button>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-32 md:bottom-40 left-1/2 transform -translate-x-1/2 flex space-x-3 z-30">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide
-                  ? 'bg-white scale-110'
-                  : 'bg-white/50 hover:bg-white/75'
-              }`}
-              onMouseEnter={() => setIsAutoPlay(false)}
-              onMouseLeave={() => setIsAutoPlay(true)}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );
