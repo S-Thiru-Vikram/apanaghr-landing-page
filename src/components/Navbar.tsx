@@ -116,8 +116,12 @@ const Navbar: React.FC = () => {
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`nav-link text-muted hover:text-brand transition-colors duration-300 text-lg font-medium ${
-                    activeSection === item.href.substring(1) ? 'nav-link-active text-brand' : ''
+                  className={`nav-link transition-colors duration-300 text-lg font-medium ${
+                    activeSection === item.href.substring(1) 
+                      ? 'nav-link-active text-brand' 
+                      : isScrolled 
+                        ? 'text-muted hover:text-brand' 
+                        : 'text-white hover:text-brand'
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -129,7 +133,11 @@ const Navbar: React.FC = () => {
               {/* Authentication Buttons */}
               <div className="flex items-center space-x-3 ml-6">
                 <motion.button
-                  className="flex items-center space-x-2 px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium"
+                  className={`flex items-center space-x-2 px-4 py-2 transition-colors duration-300 rounded-lg font-medium ${
+                    isScrolled 
+                      ? 'text-gray-700 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+                      : 'text-white hover:text-teal-300 hover:bg-white/10'
+                  }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
@@ -158,7 +166,11 @@ const Navbar: React.FC = () => {
               {/* Theme Toggle Button */}
               <motion.button
                 onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-[var(--hover-bg)] transition-colors duration-300 ml-4"
+                className={`p-2 rounded-full transition-colors duration-300 ml-4 ${
+                  isScrolled 
+                    ? 'hover:bg-[var(--hover-bg)]'
+                    : 'hover:bg-white/10'
+                }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -169,9 +181,9 @@ const Navbar: React.FC = () => {
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
                 >
                   {isDarkMode ? (
-                    <FaSun className="w-5 h-5 text-[var(--brand-color)]" />
+                    <FaSun className={`w-5 h-5 ${isScrolled ? 'text-[var(--brand-color)]' : 'text-yellow-300'}`} />
                   ) : (
-                    <FaMoon className="w-5 h-5 text-muted" />
+                    <FaMoon className={`w-5 h-5 ${isScrolled ? 'text-muted' : 'text-white'}`} />
                   )}
                 </motion.div>
               </motion.button>
@@ -182,7 +194,11 @@ const Navbar: React.FC = () => {
               {/* Mobile Theme Toggle */}
               <motion.button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-[var(--hover-bg)] transition-colors duration-300"
+                className={`p-2 rounded-lg transition-colors duration-300 ${
+                  isScrolled 
+                    ? 'hover:bg-[var(--hover-bg)]'
+                    : 'hover:bg-white/10'
+                }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -193,9 +209,9 @@ const Navbar: React.FC = () => {
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
                 >
                   {isDarkMode ? (
-                    <FaSun className="w-5 h-5 text-[var(--brand-color)]" />
+                    <FaSun className={`w-5 h-5 ${isScrolled ? 'text-[var(--brand-color)]' : 'text-yellow-300'}`} />
                   ) : (
-                    <FaMoon className="w-5 h-5 text-muted" />
+                    <FaMoon className={`w-5 h-5 ${isScrolled ? 'text-muted' : 'text-white'}`} />
                   )}
                 </motion.div>
               </motion.button>
@@ -203,7 +219,11 @@ const Navbar: React.FC = () => {
               {/* Mobile Menu Button */}
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-muted hover:text-brand p-2 rounded-lg hover:bg-[var(--hover-bg)] transition-all duration-300"
+                className={`p-2 rounded-lg transition-all duration-300 ${
+                  isScrolled 
+                    ? 'text-muted hover:text-brand hover:bg-[var(--hover-bg)]'
+                    : 'text-white hover:text-brand hover:bg-white/10'
+                }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
