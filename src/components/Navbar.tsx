@@ -19,9 +19,10 @@ const Navbar: React.FC = () => {
 
   const navItems: NavItem[] = [
     { name: 'Home', href: '#home' },
-    { name: 'Properties', href: '#properties' },
-    { name: 'Top Places', href: '#top-places' },
     { name: 'Top PGs', href: '#recommended-pgs' },
+    { name: 'Top Places', href: '#top-places' },
+    { name: 'Why ApanaGhr', href: '#why-apanaghr' },
+    { name: 'Testimonials', href: '#testimonials' },
     { name: 'Contact', href: '#contact' }
   ];
 

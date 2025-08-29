@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaMapMarkerAlt, FaHome, FaUsers, FaStar, FaArrowRight } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaStar, FaArrowRight } from 'react-icons/fa';
 import Image from 'next/image';
 
 
@@ -141,7 +141,7 @@ const TopPlaces: React.FC = () => {
             <motion.div
               key={city.id}
               variants={cardVariants}
-              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer h-[280px] bg-transparent"
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer h-[320px] bg-transparent"
               whileHover={{ y: -5 }}
             >
               {/* Background Image */}
@@ -157,88 +157,30 @@ const TopPlaces: React.FC = () => {
               </div>
               
               {/* Background Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/50" />
               
               {/* Content */}
-              <div className="relative p-3 h-full flex flex-col justify-between text-white">
+              <div className="relative p-6 h-full flex flex-col justify-between text-white">
                 {/* Top Section */}
-                <div>
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-2">
-                    <div>
-                      <h3 className="text-2xl font-bold drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)]">{city.name}</h3>
-                      <p className="text-xs text-white/70 drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">{city.state}</p>
-                    </div>
-                    <div className="flex items-center gap-1 bg-black/10 px-2 py-1 rounded-full">
-                      <FaStar className="w-3 h-3 text-yellow-300 drop-shadow" />
-                      <span className="text-xs font-medium drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">{city.rating}</span>
-                    </div>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-3xl font-bold drop-shadow-lg">{city.name}</h3>
+                    <p className="text-lg text-white/90 drop-shadow-md font-medium">{city.state}</p>
                   </div>
-
-                  {/* Statistics */}
-                  <div className="grid grid-cols-2 gap-2 mb-2">
-                    <div className="bg-black/20 backdrop-blur-md rounded-lg p-2">
-                      <div className="flex items-center gap-2 mb-1">
-                        <FaHome className="w-4 h-4" />
-                        <span className="text-xs font-medium">Available PGs</span>
-                      </div>
-                      <div className="text-lg font-bold">{city.pgCount}</div>
-                    </div>
-                    <div className="bg-black/20 backdrop-blur-md rounded-lg p-2">
-                      <div className="flex items-center gap-2 mb-1">
-                        <FaMapMarkerAlt className="w-4 h-4" />
-                        <span className="text-xs font-medium">Rent Range</span>
-                      </div>
-                      <div className="text-sm font-semibold">{city.averageRent}</div>
-                    </div>
+                  <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-3 py-2 rounded-full">
+                    <FaStar className="w-4 h-4 text-yellow-400 drop-shadow" />
+                    <span className="text-sm font-semibold drop-shadow">{city.rating}</span>
                   </div>
-
-                  {/* Popular Areas */}
-                  <div className="mb-2">
-                    <p className="text-xs font-medium mb-2 text-white/80">Popular Areas:</p>
-                    <div className="flex flex-wrap gap-1">
-                      {city.popularAreas.slice(0, 3).map((area, index) => (
-                        <span 
-                          key={index}
-                          className="bg-white/20 text-xs px-2 py-1 rounded-full"
-                        >
-                          {area}
-                        </span>
-                      ))}
-                      {city.popularAreas.length > 3 && (
-                        <span className="bg-white/20 text-xs px-2 py-1 rounded-full">
-                          +{city.popularAreas.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Highlights */}
-                  <div className="flex flex-wrap gap-1 mb-2">
-                    {city.highlights.map((highlight, index) => (
-                      <span 
-                        key={index}
-                        className="bg-black/20 backdrop-blur-md text-xs px-2 py-0.5 rounded-full font-medium"
-                      >
-                        {highlight}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-white/80 mb-3 leading-relaxed drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">
-                    {city.description}
-                  </p>
                 </div>
 
                 {/* Bottom Section - CTA */}
                 <motion.button
-                  className="w-full bg-black/20 hover:bg-black/30 border border-white/10 rounded-lg py-1.5 px-3 flex items-center justify-center gap-2 text-xs font-medium transition-all duration-300"
+                  className="w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/20 rounded-xl py-4 px-6 flex items-center justify-center gap-3 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">Explore {city.name}</span>
-                  <FaArrowRight className="w-2.5 h-2.5 group-hover:translate-x-1 transition-transform" />
+                  <span className="drop-shadow">Explore {city.name}</span>
+                  <FaArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </motion.button>
               </div>
             </motion.div>
