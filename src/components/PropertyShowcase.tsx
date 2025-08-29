@@ -12,7 +12,7 @@ interface PropertyCard {
   description: string;
   buttonText: string;
   image: string;
-  gradient: string;
+  
   textColor: string;
 }
 
@@ -24,8 +24,8 @@ const PropertyShowcase: React.FC = () => {
       title: "Premium PGs",
       description: "Fully furnished PGs with all amenities for working professionals",
       buttonText: "Explore",
-      image: "/logo.png", // Replace with actual PG image
-      gradient: "from-teal-600 to-teal-800",
+      image: "/images/premiumPG.png", // Replace with actual PG image
+      
       textColor: "text-white"
     },
     {
@@ -34,8 +34,8 @@ const PropertyShowcase: React.FC = () => {
       title: "Student Hostels",
       description: "Budget-friendly accommodations near colleges and universities", 
       buttonText: "Explore",
-      image: "/logo.png", // Replace with actual hostel image
-      gradient: "from-green-500 to-green-700",
+      image: "/images/hostel.png", // Replace with actual hostel image
+      
       textColor: "text-white"
     },
     {
@@ -44,8 +44,8 @@ const PropertyShowcase: React.FC = () => {
       title: "Verified Roommates",
       description: "Find compatible roommates through our verification process",
       buttonText: "Find Match",
-      image: "/logo.png", // Replace with roommate illustration
-      gradient: "from-blue-500 to-blue-700",
+      image: "/images/verROOM.png", // Replace with roommate illustration
+      
       textColor: "text-white"
     },
     {
@@ -54,8 +54,8 @@ const PropertyShowcase: React.FC = () => {
       title: "Shared Flats",
       description: "Spacious apartments perfect for sharing with roommates",
       buttonText: "Explore",
-      image: "/logo.png", // Replace with flat image
-      gradient: "from-orange-500 to-orange-700",
+      image: "/images/sharedflats.png", // Replace with flat image
+      
       textColor: "text-white"
     }
   ];
@@ -73,7 +73,7 @@ const PropertyShowcase: React.FC = () => {
           >
             We've got accommodations for everyone
           </motion.h2>
-          <div className="w-16 h-1 bg-teal-500 mx-auto"></div>
+          <div className="w-16 h-1 bg-teal-500 mx-auto mb-12"></div>
         </div>
 
         {/* Property Cards Grid */}
@@ -86,11 +86,10 @@ const PropertyShowcase: React.FC = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
             >
-              {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient}`}></div>
+              
               
               {/* Background Image Overlay */}
-              <div className="absolute inset-0 opacity-20">
+              <div className="absolute inset-0 opacity-1">
                 <Image
                   src={card.image}
                   alt={card.title}

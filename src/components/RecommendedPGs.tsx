@@ -34,7 +34,7 @@ const RecommendedPGs: React.FC = () => {
       occupancy: "Boys Only",
       amenities: ["WiFi", "Meals", "AC", "Parking"],
       rating: 4.5,
-      image: "/logo.png"
+      image: "/images/whitefield.jpg"
     },
     {
       id: 2,
@@ -47,7 +47,7 @@ const RecommendedPGs: React.FC = () => {
       occupancy: "Girls Only",
       amenities: ["WiFi", "Meals", "Laundry", "Security"],
       rating: 4.7,
-      image: "/logo.png"
+      image: "/images/hsr.png"
     },
     {
       id: 3,
@@ -60,7 +60,7 @@ const RecommendedPGs: React.FC = () => {
       occupancy: "Co-living",
       amenities: ["WiFi", "Gym", "Meals", "Housekeeping"],
       rating: 4.8,
-      image: "/logo.png"
+      image: "/images/indiranagar.png"
     },
     {
       id: 4,
@@ -73,7 +73,7 @@ const RecommendedPGs: React.FC = () => {
       occupancy: "Students",
       amenities: ["WiFi", "Meals", "Study Room"],
       rating: 4.3,
-      image: "/logo.png"
+      image: "/images/koramangala.png"
     }
   ];
 
@@ -96,7 +96,7 @@ const RecommendedPGs: React.FC = () => {
   };
 
   return (
-    <section className="pt-44 pb-16 bg-white dark:bg-gray-900">
+    <section className="pt-24 pb-16 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex justify-between items-center mb-12">
@@ -149,6 +149,8 @@ const RecommendedPGs: React.FC = () => {
                   alt={pg.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  priority={pg.id <= 2}
                 />
                 {/* Image Count Badge */}
                 <div className="absolute top-3 left-3 bg-black/70 text-white px-2 py-1 rounded text-sm flex items-center gap-1">

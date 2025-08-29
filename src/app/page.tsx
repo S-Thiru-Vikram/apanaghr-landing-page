@@ -15,6 +15,7 @@ export default function Home() {
       <Navbar />
       <section id="home" className="relative">
         <HeroNew />
+        <div className="mt-6 w-full max-w-md mb-20"></div>
         <SearchBar />
       </section>
       <section id="recommended-pgs">
